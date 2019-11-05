@@ -27,7 +27,8 @@ public class SeedCollisionTrigger : MonoBehaviour
 			GameManager.Instance.ResetMultiplier();
 
 			// Send the seed back to the last checkpoint
-			transform.parent.position = new Vector2(currentCheckpointPosition.x + seedOffsetFromDirt.x, currentCheckpointPosition.y + seedOffsetFromDirt.y);
+			transform.position = new Vector2(currentCheckpointPosition.x + seedOffsetFromDirt.x, currentCheckpointPosition.y + seedOffsetFromDirt.y);
+			GetComponent<Rigidbody2D>().velocity = Vector2.zero;	// TOFIX: This doesn't work btw
 		}
 
 		if (collision.tag == "FinishLine")

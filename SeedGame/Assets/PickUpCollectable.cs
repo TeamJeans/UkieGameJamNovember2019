@@ -8,7 +8,7 @@ public class PickUpCollectable : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		if (collision.tag == "Seed")
+		if (collision.tag == "Player")
 		{
 			GameManager.Instance.AddToMultiplier(multiplierToAdd);
 			Destroy(gameObject);

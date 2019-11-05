@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5774724267243551728}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.66118705, y: 0.06950998, z: -2.0117188}
+  m_LocalPosition: {x: 0.66118705, y: 0.06950998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5774724268344810896}
@@ -105,9 +105,10 @@ GameObject:
   - component: {fileID: 5774724267987150114}
   - component: {fileID: 5774724267987150113}
   - component: {fileID: 5774724267987150140}
+  - component: {fileID: 1904757408}
   m_Layer: 0
   m_Name: SeedSpr
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -185,7 +186,7 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -238,6 +239,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73483956368a27145a033b98122598be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1904757408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5774724267987150119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11348e52c69a4a1429ebfd0918cbe715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  seedOffsetFromDirt: {x: 0, y: 0}
 --- !u!1 &5774724268344810903
 GameObject:
   m_ObjectHideFlags: 0
@@ -328,7 +342,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5774724269062843838}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6121871, y: -0.68548965, z: -2.0117188}
+  m_LocalPosition: {x: 0.6121871, y: -0.68548965, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5774724268421520197}

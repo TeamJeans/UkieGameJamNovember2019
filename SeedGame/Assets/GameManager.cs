@@ -12,9 +12,9 @@ public class GameManager : MonoBehaviour
 
     private uint currentMultiplier = 1;
 	private float currentSeedHeight = 0f;
-	private float upwardDistanceTraveled = 0f;
+	private float maxUpwardDistanceTraveled = 0f;
 	private int currentScore = 0;
-	private Vector2 seedStartingPos = Vector2.zero;
+	[SerializeField] private Transform seedStartingPos = null;
 
 	private void Awake()
 	{
@@ -35,22 +35,22 @@ public class GameManager : MonoBehaviour
 	private void Start()
 	{
 		// Initialise seed start position
-		seedStartingPos = seedTransform.position;
+		seedTransform.position = new Vector2(seedStartingPos.position.x, seedStartingPos.position.y);
 	}
 
 	private void Update()
 	{
 		// Get the current seed height
-		currentSeedHeight = seedTransform.position.y - seedStartingPos.y;
+		currentSeedHeight = seedTransform.position.y - seedStartingPos.position.y;
 
 		// Calculate the distance upward the seed has traveled
-		if ((currentSeedHeight + currentMultiplier) > upwardDistanceTraveled)
+		if ((currentSeedHeight + currentMultiplier) > maxUpwardDistanceTraveled)
 		{
-			upwardDistanceTraveled = currentSeedHeight + currentMultiplier;
+			maxUpwardDistanceTraveled = currentSeedHeight + currentMultiplier;
 		}
 
 		// Calculate the score
-		currentScore = (int)((upwardDistanceTraveled) * 10);
+		currentScore = (int)((maxUpwardDistanceTraveled) * 10);
 
 		// Update score text
 		scoreText.text = "" + currentScore;
@@ -78,6 +78,12 @@ public class GameManager : MonoBehaviour
 	public void ResetGame()
 	{
 		//TODO: Reset the collectibles
-		seedTransform.position = new Vector2(seedStartingPos.x, seedStartingPos.y);
+
+		// Reset seed positions
+		seedTransform.position = new Vector2(seedStartingPos.position.x, seedStartingPos.position.y);
+
+		// Reset score and multiplier
+		maxUpwardDistanceTraveled = 0;
+		currentMultiplier = 1;
 	}
 }
