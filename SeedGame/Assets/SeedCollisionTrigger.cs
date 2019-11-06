@@ -4,37 +4,42 @@ using UnityEngine;
 
 public class SeedCollisionTrigger : MonoBehaviour
 {
-	[SerializeField] private Vector2 seedOffsetFromDirt = Vector2.zero;
-	private Vector2 currentCheckpointPosition = Vector2.zero;
+    [SerializeField] private Vector2 seedOffsetFromDirt = Vector2.zero;
+    private Vector2 currentCheckpointPosition = Vector2.zero;
 
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (collision.tag == "Dirt")
-		{
-			// Grow new flower
-			Debug.Log("Touching dirt");
+    private void Update()
+    {
+        
+    }
 
-			// Set this piece of dirt as the new checkpoint
-			currentCheckpointPosition = collision.transform.position;
-		}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Dirt"))
+        {
+            // Grow new flower
+            Debug.Log("Touching dirt");
 
-		if (collision.tag == "Wall")
-		{
-			// Respawn at last checkpoint
-			Debug.Log("Touching wall");
+            // Set this piece of dirt as the new checkpoint
+            currentCheckpointPosition = collision.transform.position;
+        }
 
-			// Reset the player's multiplier
-			GameManager.Instance.ResetMultiplier();
+        if (collision.CompareTag("Wall"))
+        {
+            // Respawn at last checkpoint
+            Debug.Log("Touching wall");
 
-			// Send the seed back to the last checkpoint
-			transform.position = new Vector2(currentCheckpointPosition.x + seedOffsetFromDirt.x, currentCheckpointPosition.y + seedOffsetFromDirt.y);
-			GetComponent<Rigidbody2D>().velocity = Vector2.zero;	// TOFIX: This doesn't work btw
-		}
+            // Reset the player's multiplier
+            GameManager.Instance.ResetMultiplier();
 
-		if (collision.tag == "FinishLine")
-		{
-			// Reached the end
-			MenuManager.Instance.EndReached();
-		}
-	}
+            // Send the seed back to the last checkpoint
+            transform.position = new Vector2(currentCheckpointPosition.x + seedOffsetFromDirt.x, currentCheckpointPosition.y + seedOffsetFromDirt.y);
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;    // TOFIX: This doesn't work btw
+        }
+
+        if (collision.CompareTag("FinishLine"))
+        {
+            // Reached the end
+            MenuManager.Instance.EndReached();
+        }
+    }
 }

@@ -7,7 +7,7 @@ public class WindMovement : MonoBehaviour
     Vector2 startPos;
     Vector2 endPos;
     public Vector2 windDir;
-
+    Rigidbody2D rb;
 
     Vector3[] points = new Vector3[5];
     Vector3[] windDirs = new Vector3[5];
@@ -19,6 +19,7 @@ public class WindMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = GameObject.FindGameObjectWithTag("SeedLeaf").GetComponent<Rigidbody2D>();
         startPos = new Vector2(0,0);
         endPos = new Vector2(0, 0);
         windDir = new Vector2(0, 0);
@@ -45,7 +46,6 @@ public class WindMovement : MonoBehaviour
                 endPos = Input.mousePosition;
                 windDir = (endPos - startPos) / 20;
             }
-
 
             //reduce wind to 0 over time
             windDir -= windDir.normalized * new Vector2(0.1f, 0.1f);
@@ -76,6 +76,14 @@ public class WindMovement : MonoBehaviour
                 windDir = (endPos - startPos) / 20;       
             }
         }
+
+
+
+
+
+
+        //move leaf
+        rb.AddForce(new Vector2(windDir.x, windDir.y));
     }
 
 

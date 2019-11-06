@@ -8,6 +8,7 @@ TagManager:
   - Dirt
   - Seed
   - FinishLine
+  - SeedLeaf
   layers:
   - Default
   - TransparentFX

@@ -10,12 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 5774724267243551729}
   - component: {fileID: 5774724267243551730}
-  - component: {fileID: 5774724267243551731}
-  - component: {fileID: 5774724267243551245}
   - component: {fileID: 5774724267243551244}
   m_Layer: 0
   m_Name: SeedLeaf
-  m_TagString: Player
+  m_TagString: SeedLeaf
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,31 +53,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5774724267243551731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5774724267243551728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 106cf327a48f8e0469b59bfa3ade2b47, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  windFactor: {x: 0, y: 0}
---- !u!114 &5774724267243551245
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5774724267243551728}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73483956368a27145a033b98122598be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5774724267243551244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,7 +77,6 @@ GameObject:
   - component: {fileID: 5774724267987150115}
   - component: {fileID: 5774724267987150114}
   - component: {fileID: 5774724267987150113}
-  - component: {fileID: 5774724267987150140}
   - component: {fileID: 1904757408}
   m_Layer: 0
   m_Name: SeedSpr
@@ -227,18 +199,6 @@ PolygonCollider2D:
       - {x: 0.01, y: -0.44}
       - {x: -0.01, y: -0.26}
       - {x: -0.089999996, y: -0.17}
---- !u!114 &5774724267987150140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5774724267987150119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73483956368a27145a033b98122598be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1904757408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +206,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5774724267987150119}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 11348e52c69a4a1429ebfd0918cbe715, type: 3}
   m_Name: 
@@ -325,7 +285,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5774724269062843839}
   - component: {fileID: 5774724269062843832}
-  - component: {fileID: 5774724269062843834}
   - component: {fileID: 5774724269062843835}
   m_Layer: 0
   m_Name: SeedBase
@@ -370,18 +329,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &5774724269062843834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5774724269062843838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73483956368a27145a033b98122598be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!231 &5774724269062843835
 SpringJoint2D:
   m_ObjectHideFlags: 0
