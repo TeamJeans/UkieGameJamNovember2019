@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
 
 		// Reset seed positions
 		seedTransform.position = new Vector2(seedStartingPos.position.x, seedStartingPos.position.y);
+		Debug.Log("ResetGame");
 
 		// Reset score and multiplier
 		maxUpwardDistanceTraveled = 0;
