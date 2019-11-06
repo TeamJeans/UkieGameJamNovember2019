@@ -5,8 +5,7 @@ using UnityEngine;
 public class SeedCollisionTrigger : MonoBehaviour
 {
     [SerializeField] private Vector3 seedOffsetFromDirt = Vector2.zero;
-	[SerializeField] private Transform fullSeed = null;
-    private Vector3 currentCheckpointPosition = Vector2.zero;
+	private GameObject lastFlowerHead;
 
     private void Update()
     {
@@ -20,8 +19,13 @@ public class SeedCollisionTrigger : MonoBehaviour
             // Grow new flower
             Debug.Log("Touching dirt");
 
+			// Grow flower on dirt if we haven't already
+			collision.GetComponent<GrowFlower>().Grow();
+
             // Set this piece of dirt as the new checkpoint
-            currentCheckpointPosition = collision.transform.position;
+			lastFlowerHead = collision.GetComponent<GrowFlower>().spawnedFlower.transform.Find("SeedSpawnPosition").gameObject;
+			GameManager.Instance.lastFlowerHead = lastFlowerHead;
+			GameManager.Instance.PlantSeed(lastFlowerHead);
         }
 
         if (collision.CompareTag("Wall"))
@@ -32,9 +36,9 @@ public class SeedCollisionTrigger : MonoBehaviour
             // Reset the player's multiplier
             GameManager.Instance.ResetMultiplier();
 
-
 			// Send the seed back to the last checkpoint
-			GameManager.Instance.RespawnSeedAtLastCheckpoint(currentCheckpointPosition + currentCheckpointPosition);
+			//Debug.Log(lastFlowerHead);
+			GameManager.Instance.RespawnSeedAtLastCheckpoint();
 
 			Debug.Log("Respawn Seed");
         }

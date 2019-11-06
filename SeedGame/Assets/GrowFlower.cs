@@ -4,15 +4,26 @@ using UnityEngine;
 
 public class GrowFlower : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[SerializeField] private GameObject flowerPrefab;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public GameObject spawnedFlower = null;
+	bool flowerHasSpawned = false;
+
+    public void Grow()
+	{
+		if (!flowerHasSpawned)
+		{
+			flowerHasSpawned = true;
+			spawnedFlower = Instantiate(flowerPrefab, transform.position, transform.rotation);
+		}
+	}
+
+	public void DestroyFlower()
+	{
+		if (flowerHasSpawned)
+		{
+			flowerHasSpawned = false;
+			Destroy(spawnedFlower);
+		}
+	}
 }

@@ -13,11 +13,15 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Transform collectables = null;
 	[SerializeField] private CameraFollow cameraFollow = null;
 	[SerializeField] private GameObject seedPrefab = null;
+	[SerializeField] private Transform dirtPatches = null;
 
+	public GameObject lastFlowerHead;
     private uint currentMultiplier = 1;
 	private float currentSeedHeight = 0f;
 	private float maxUpwardDistanceTraveled = 0f;
 	private int currentScore = 0;
+	public bool flowerReady = false;
+	private Vector3 seedSpawnPosition;
 
 	private void Awake()
 	{
@@ -62,7 +66,11 @@ public class GameManager : MonoBehaviour
 			scoreText.text = "" + currentScore + "x" + currentMultiplier;
 		}
 
-
+		if (Input.GetMouseButtonDown(1) && flowerReady)
+		{
+			flowerReady = false;
+			SpawnSeedAtFlowerHead();
+		}
 	}
 
 	public void AddToMultiplier(uint multiplierToAdd)
@@ -86,12 +94,18 @@ public class GameManager : MonoBehaviour
 			t.gameObject.SetActive(true);
 		}
 
+		// Reset flowers
+		foreach(Transform t in dirtPatches)
+		{
+			t.GetComponent<GrowFlower>().DestroyFlower();
+		}
+
 		// Reset seed positions
 		//seedTransform.position = new Vector2(seedStartingPos.position.x, seedStartingPos.position.y);
 		Destroy(seedTransform.gameObject);
 
 		GameObject newSeed = Instantiate(seedPrefab, seedStartingPos.position, Quaternion.identity);
-		seedTransform = newSeed.transform;
+		seedTransform = newSeed.transform.Find("SeedBase").transform;
 		cameraFollow.player = newSeed.transform.Find("SeedBase").gameObject;
 		Debug.Log("ResetGame");
 
@@ -100,12 +114,40 @@ public class GameManager : MonoBehaviour
 		currentMultiplier = 1;
 	}
 
-	public void RespawnSeedAtLastCheckpoint(Vector3 lastCheckpoint)
+	public void RespawnSeedAtLastCheckpoint()
 	{
+		Debug.Log("RESPAWN");
 		Destroy(seedTransform.gameObject);
 
-		GameObject newSeed = Instantiate(seedPrefab, lastCheckpoint, Quaternion.identity);
-		seedTransform = newSeed.transform;
+		cameraFollow.player = lastFlowerHead;
+		seedSpawnPosition = lastFlowerHead.transform.position;
+		seedTransform = seedStartingPos;
+
+		flowerReady = true;
+	}
+
+	public void PlantSeed(GameObject flowerHead)
+	{
+		Destroy(seedTransform.gameObject);
+		cameraFollow.player = flowerHead;
+		seedSpawnPosition = flowerHead.transform.position;
+		seedTransform = seedStartingPos;
+
+		StartCoroutine(WaitForFlowerAnim());
+	}
+
+	IEnumerator WaitForFlowerAnim()
+	{
+		yield return new WaitForSeconds(2.5f);
+
+		flowerReady = true;
+	}
+
+	public void SpawnSeedAtFlowerHead()
+	{
+		GameObject newSeed = Instantiate(seedPrefab, seedSpawnPosition, Quaternion.identity);
+		seedTransform = newSeed.transform.Find("SeedBase").transform;
 		cameraFollow.player = newSeed.transform.Find("SeedBase").gameObject;
+		Debug.Log("Spawned seed");
 	}
 }
