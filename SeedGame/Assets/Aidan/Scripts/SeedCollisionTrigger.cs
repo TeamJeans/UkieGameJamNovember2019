@@ -32,6 +32,7 @@ public class SeedCollisionTrigger : MonoBehaviour
             // Reset the player's multiplier
             GameManager.Instance.ResetMultiplier();
 
+
 			// Send the seed back to the last checkpoint
 			GameManager.Instance.RespawnSeedAtLastCheckpoint(currentCheckpointPosition + currentCheckpointPosition);
 

@@ -9,12 +9,15 @@ public class WindMovement : MonoBehaviour
     public Vector2 windDir;
     Rigidbody2D rb;
 
-    Vector3[] points = new Vector3[5];
-    Vector3[] windDirs = new Vector3[5];
-    int nextPoint;
+    Vector3[] points = new Vector3[20];
+    Vector3[] windDirs = new Vector3[20];
+    float delayTime;
     bool donePoints;
+    bool swoosh;
+    int furtherstPoint;
+    int totalPoints;
 
-    bool method;//TODO DELETE THIS
+    bool method;
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +26,13 @@ public class WindMovement : MonoBehaviour
         startPos = new Vector2(0,0);
         endPos = new Vector2(0, 0);
         windDir = new Vector2(0, 0);
-        method = true;//TODO DELETE THIS
-        nextPoint = 0;
         donePoints = false;
+        swoosh = false;
+        furtherstPoint = 0;
+        totalPoints = 0;
+
+        delayTime = 0.05f;
+        method = true;//set to false for method 2, not working rn
     }
 
     // Update is called once per frame
@@ -49,6 +56,7 @@ public class WindMovement : MonoBehaviour
 
             //reduce wind to 0 over time
             windDir -= windDir.normalized * new Vector2(0.1f, 0.1f);
+            Debug.DrawLine(startPos, endPos, Color.yellow, 10);
 
         }
 
@@ -62,26 +70,31 @@ public class WindMovement : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+                //set start point
                 points[0] = Input.mousePosition;
-                nextPoint = 0;
+
+                //get mid points
+                swoosh = false;
                 donePoints = false;
-                StartCoroutine(PointCount());
+                StartCoroutine(PointCount()); 
             }
 
 
             if (Input.GetMouseButtonUp(0))
             {
+                //cut off threads when mouse released
+                totalPoints = furtherstPoint;
+                if (totalPoints > points.Length) totalPoints = points.Length;
+
+                //set end pos
+                points[furtherstPoint] = Input.mousePosition;
+
+                //set mid points
                 donePoints = true;
-                points[4] = Input.mousePosition;
-                windDir = (endPos - startPos) / 20;       
+                swoosh = true;
+                StartCoroutine(MoveWind());
             }
         }
-
-
-
-
-
-
         //move leaf
         rb.AddForce(new Vector2(windDir.x, windDir.y));
     }
@@ -90,31 +103,41 @@ public class WindMovement : MonoBehaviour
 
     IEnumerator PointCount()
     {
+        furtherstPoint = 1;
         //get 3 points between start and end
         for (int i = 1; i < points.Length - 1; i++)
         {
             if (donePoints == false)
             {
-                Debug.Log("Waiting point " + i);
-                yield return new WaitForSeconds(0.2f);
-                points[nextPoint] = Input.mousePosition;
-                nextPoint++;
-                Debug.Log("done point " + i);
+                yield return new WaitForSeconds(delayTime);
+                points[i] = Input.mousePosition;
+                furtherstPoint++;
             }
-        }
+        } 
     }
 
     IEnumerator MoveWind()
     {
-
-        for (int i = 0; i < points.Length; i++)
+        yield return new WaitForSeconds(delayTime);
+        //set mid points
+        for (int i = 1; i < totalPoints; i++)
         {
-            yield return new WaitForSeconds(0.2f);
+            windDirs[i - 1] = points[i] - points[i - 1];
         }
-        
+
+
+
+        //move rigid body
+        for (int i = 0; i < totalPoints; i++)
+        {
+            if (swoosh)
+            {
+                yield return new WaitForSeconds(delayTime);
+                rb.AddForce(new Vector2(windDirs[i].x, windDirs[i].y));
+
+                Debug.Log("Moved " + i);
+                Debug.DrawLine(points[i], points[i + 1], Color.red, 10);
+            }   
+        }
     }
-
-
-
-
 }
