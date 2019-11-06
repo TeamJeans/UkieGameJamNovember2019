@@ -9,8 +9,8 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Wind = GetComponent<AudioSource>();
 
-  
     }
 
     // Update is called once per frame
@@ -18,7 +18,6 @@ public class AudioManager : MonoBehaviour
     {
         if(Input.GetMouseButtonUp(0))
         {
-            Wind = GetComponent<AudioSource>();
             Wind.Play(1);
         }
     }

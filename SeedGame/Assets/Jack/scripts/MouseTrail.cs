@@ -11,7 +11,7 @@ public class MouseTrail : MonoBehaviour
     {
         Cursor.visible = false;
         pos = Input.mousePosition;
-        pos.z = 10.0f;
+        pos.z = -18.0f;
         pos = Camera.main.ScreenToWorldPoint(pos);
     }
 

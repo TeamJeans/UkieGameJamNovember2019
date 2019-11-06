@@ -66,12 +66,26 @@ public class GameManager : MonoBehaviour
 			scoreText.text = "" + currentScore + "x" + currentMultiplier;
 		}
 
-		if (Input.GetMouseButtonDown(1) && flowerReady)
-		{
-			flowerReady = false;
-			SpawnSeedAtFlowerHead();
-		}
+
+        if (Input.GetMouseButtonDown(1))
+        {
+                SpawnSeed();
+        }
+        
+
+		
 	}
+
+
+    public void SpawnSeed()
+    {
+        if (flowerReady)
+        {
+            flowerReady = false;
+            SpawnSeedAtFlowerHead();
+        }
+    }
+
 
 	public void AddToMultiplier(uint multiplierToAdd)
 	{
