@@ -1457,6 +1457,7 @@ GameObject:
   m_Component:
   - component: {fileID: 498969414}
   - component: {fileID: 498969413}
+  - component: {fileID: 498969415}
   m_Layer: 0
   m_Name: audio
   m_TagString: Untagged
@@ -1550,7 +1551,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1574,6 +1575,14 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!81 &498969415
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 498969412}
+  m_Enabled: 1
 --- !u!1 &508249325
 GameObject:
   m_ObjectHideFlags: 0
@@ -6674,7 +6683,7 @@ Camera:
   far clip plane: 30.01
   field of view: 60
   orthographic: 1
-  orthographic size: 5.1
+  orthographic size: 3.62
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6700,8 +6709,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -93.37, z: -23.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1840091461}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7240,11 +7248,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1840091460}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.4, z: 29.72}
-  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
+  m_LocalPosition: {x: 0, y: -87.97, z: 5.76}
+  m_LocalScale: {x: 3.5, y: 12.9647, z: 3.5}
   m_Children: []
-  m_Father: {fileID: 749407779}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1840091462
 SpriteRenderer:
