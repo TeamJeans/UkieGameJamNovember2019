@@ -9,12 +9,13 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] private TextMeshProUGUI scoreText = null;
 	[SerializeField] private Transform seedTransform = null;
+	[SerializeField] private Transform seedStartingPos = null;
+	[SerializeField] private Transform collectables = null;
 
     private uint currentMultiplier = 1;
 	private float currentSeedHeight = 0f;
 	private float maxUpwardDistanceTraveled = 0f;
 	private int currentScore = 0;
-	[SerializeField] private Transform seedStartingPos = null;
 
 	private void Awake()
 	{
@@ -77,7 +78,11 @@ public class GameManager : MonoBehaviour
 
 	public void ResetGame()
 	{
-		//TODO: Reset the collectibles
+		// Reset the collectibles
+		foreach( Transform t in collectables)
+		{
+			t.gameObject.SetActive(true);
+		}
 
 		// Reset seed positions
 		seedTransform.position = new Vector2(seedStartingPos.position.x, seedStartingPos.position.y);

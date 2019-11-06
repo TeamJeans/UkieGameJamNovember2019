@@ -28,7 +28,6 @@ public class SeedCollisionTrigger : MonoBehaviour
 
 			// Send the seed back to the last checkpoint
 			transform.position = new Vector2(currentCheckpointPosition.x + seedOffsetFromDirt.x, currentCheckpointPosition.y + seedOffsetFromDirt.y);
-			GetComponent<Rigidbody2D>().velocity = Vector2.zero;	// TOFIX: This doesn't work btw
 		}
 
 		if (collision.tag == "FinishLine")

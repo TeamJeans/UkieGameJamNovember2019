@@ -11,7 +11,7 @@ public class PickUpCollectable : MonoBehaviour
 		if (collision.tag == "Player")
 		{
 			GameManager.Instance.AddToMultiplier(multiplierToAdd);
-			Destroy(gameObject);
+			gameObject.SetActive(false);
 		}
 	}
 }
