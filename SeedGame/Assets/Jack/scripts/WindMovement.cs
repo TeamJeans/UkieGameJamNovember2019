@@ -72,7 +72,7 @@ public class WindMovement : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
                 donePoints = true;
-                points[5] = Input.mousePosition;
+                points[4] = Input.mousePosition;
                 windDir = (endPos - startPos) / 20;       
             }
         }
@@ -91,11 +91,16 @@ public class WindMovement : MonoBehaviour
     IEnumerator PointCount()
     {
         //get 3 points between start and end
-        for (int i = 1; i < points.Length - 2; i++)
+        for (int i = 1; i < points.Length - 1; i++)
         {
-            yield return new WaitForSeconds(0.2f);
-            points[nextPoint] = Input.mousePosition;
-            nextPoint++;
+            if (donePoints == false)
+            {
+                Debug.Log("Waiting point " + i);
+                yield return new WaitForSeconds(0.2f);
+                points[nextPoint] = Input.mousePosition;
+                nextPoint++;
+                Debug.Log("done point " + i);
+            }
         }
     }
 
