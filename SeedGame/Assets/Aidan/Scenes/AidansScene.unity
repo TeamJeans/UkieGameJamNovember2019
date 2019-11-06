@@ -497,6 +497,7 @@ MonoBehaviour:
   scoreText: {fileID: 1809031044}
   seedTransform: {fileID: 1904757404}
   seedStartingPos: {fileID: 1189408087}
+  collectables: {fileID: 1441846527}
 --- !u!4 &132978009
 Transform:
   m_ObjectHideFlags: 0
