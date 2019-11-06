@@ -6,6 +6,7 @@ public class SeedCollisionTrigger : MonoBehaviour
 {
     [SerializeField] private Vector3 seedOffsetFromDirt = Vector2.zero;
 	private GameObject lastFlowerHead;
+    [SerializeField] private GameObject treePrefab;
 
     private void Update()
     {
@@ -26,6 +27,13 @@ public class SeedCollisionTrigger : MonoBehaviour
 			lastFlowerHead = collision.GetComponent<GrowFlower>().spawnedFlower.transform.Find("SeedSpawnPosition").gameObject;
 			GameManager.Instance.lastFlowerHead = lastFlowerHead;
 			GameManager.Instance.PlantSeed(lastFlowerHead);
+        }
+
+        if (collision.CompareTag("FinishLine"))
+        {
+            // Grow flower on dirt if we haven't already
+            Instantiate(treePrefab, transform.position, Quaternion.identity);
+            Debug.Log("POS " + transform.position);
         }
 
         if (collision.CompareTag("Wall"))
