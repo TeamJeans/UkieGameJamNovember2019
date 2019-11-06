@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Transform seedTransform = null;
 	[SerializeField] private Transform seedStartingPos = null;
 	[SerializeField] private Transform collectables = null;
+	[SerializeField] private CameraFollow cameraFollow = null;
+	[SerializeField] private GameObject seedPrefab = null;
 
     private uint currentMultiplier = 1;
 	private float currentSeedHeight = 0f;
@@ -85,11 +87,25 @@ public class GameManager : MonoBehaviour
 		}
 
 		// Reset seed positions
-		seedTransform.position = new Vector2(seedStartingPos.position.x, seedStartingPos.position.y);
+		//seedTransform.position = new Vector2(seedStartingPos.position.x, seedStartingPos.position.y);
+		Destroy(seedTransform.gameObject);
+
+		GameObject newSeed = Instantiate(seedPrefab, seedStartingPos.position, Quaternion.identity);
+		seedTransform = newSeed.transform;
+		cameraFollow.player = newSeed.transform.Find("SeedBase").gameObject;
 		Debug.Log("ResetGame");
 
 		// Reset score and multiplier
 		maxUpwardDistanceTraveled = 0;
 		currentMultiplier = 1;
+	}
+
+	public void RespawnSeedAtLastCheckpoint(Vector3 lastCheckpoint)
+	{
+		Destroy(seedTransform.gameObject);
+
+		GameObject newSeed = Instantiate(seedPrefab, lastCheckpoint, Quaternion.identity);
+		seedTransform = newSeed.transform;
+		cameraFollow.player = newSeed.transform.Find("SeedBase").gameObject;
 	}
 }

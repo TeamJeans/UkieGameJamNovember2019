@@ -95,7 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11348e52c69a4a1429ebfd0918cbe715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seedOffsetFromDirt: {x: 0, y: 0}
+  seedOffsetFromDirt: {x: 1, y: 1, z: 0}
+  fullSeed: {fileID: 5774724268344810896}
 --- !u!1 &5774724267243551728
 GameObject:
   m_ObjectHideFlags: 0

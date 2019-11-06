@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class SeedCollisionTrigger : MonoBehaviour
 {
-    [SerializeField] private Vector2 seedOffsetFromDirt = Vector2.zero;
-    private Vector2 currentCheckpointPosition = Vector2.zero;
+    [SerializeField] private Vector3 seedOffsetFromDirt = Vector2.zero;
+	[SerializeField] private Transform fullSeed = null;
+    private Vector3 currentCheckpointPosition = Vector2.zero;
 
     private void Update()
     {
@@ -31,9 +32,10 @@ public class SeedCollisionTrigger : MonoBehaviour
             // Reset the player's multiplier
             GameManager.Instance.ResetMultiplier();
 
-            // Send the seed back to the last checkpoint
-            transform.position = new Vector2(currentCheckpointPosition.x + seedOffsetFromDirt.x, currentCheckpointPosition.y + seedOffsetFromDirt.y);
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;    // TOFIX: This doesn't work btw
+			// Send the seed back to the last checkpoint
+			GameManager.Instance.RespawnSeedAtLastCheckpoint(currentCheckpointPosition + currentCheckpointPosition);
+
+			Debug.Log("Respawn Seed");
         }
 
         if (collision.CompareTag("FinishLine"))

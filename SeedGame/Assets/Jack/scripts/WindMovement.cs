@@ -19,7 +19,7 @@ public class WindMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GameObject.FindGameObjectWithTag("SeedLeaf").GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         startPos = new Vector2(0,0);
         endPos = new Vector2(0, 0);
         windDir = new Vector2(0, 0);
